@@ -49,7 +49,7 @@ def mult(v, k):
 def test():
     r0 = [3,3]
     e = norm_v([1,-1])
-    n = norm_v([1,-0.5])
+    n = norm_v([1,0])
     rp0 = [1,6]
     return r0,e,rp0,n
 
@@ -104,7 +104,7 @@ def plane():
     plt.plot([cross_point[0], reflection_a[0]], [cross_point[1], reflection_a[1]])
 
     # Преломлённый луч
-    refraction_e = mult(get_refraction(e, n, 1, 4), t)
+    refraction_e = mult(get_refraction(e, n, 1, 1), t)
     refraction_a = (cross_point[0] + refraction_e[0], cross_point[1] + refraction_e[1])
     plt.plot([cross_point[0], refraction_a[0]], [cross_point[1], refraction_a[1]])
 
