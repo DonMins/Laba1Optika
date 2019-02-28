@@ -1,51 +1,8 @@
 import numpy as np
+from function import *
+from numpy import dot # cкалярное произведение
 import matplotlib.pyplot as plt
-#  модуль вектора
 
-def get_len(v):
-    result = 0
-    for i in range(len(v)):
-        result += v[i] ** 2
-    return np.sqrt(result)
-
-# нормировка
-def norm_v(v):
-    l = get_len(v)
-    for i in range(len(v)):
-        v[i] = v[i] / l
-    return v
-
-# ввод значений
-def get_v():
-    v = str(input()).split(' ')
-    result = []
-    for e in v:
-        result.append(float(e))
-    return result
-
-def scal_mult(v1, v2):
-    res = 0
-    for i in range(len(v1)):
-        res += v1[i] * v2[i]
-    return res
-
-def sub(a, b):
-    res = []
-    for i in range(len(a)):
-        res.append(a[i] - b[i])
-    return res
-
-def sum(a, b):
-    res = []
-    for i in range(len(a)):
-        res.append(a[i] + b[i])
-    return res
-
-def mult(v, k):
-    res = []
-    for i in range(len(v)):
-        res.append(v[i] * k)
-    return res
 def test():
     r0 = [3,3]
     e = norm_v([1,-1])
@@ -54,39 +11,25 @@ def test():
     return r0,e,rp0,n
 
 def get_reflection(e, n):
-    return sub(e, mult(n, 2 * scal_mult(e, n)))
-
+    return sub(e, mult(n, 2 * dot(e, n)))
 
 
 def get_refraction(e, n, n1, n2):
-    sq = np.sqrt((1-n1**2/n2**2 * (1-(scal_mult(e,n))**2)))
-
+    sq = np.sqrt((1-n1**2/n2**2 * (1-(dot(e,n))**2)))
     t = n2*sq
-
-    t2 = n1*scal_mult(e,n)
-
+    t2 = n1*dot(e,n)
     t3 = t2 - t
-
     t4 = mult(n,t3)
     t5 = mult(e,n1)
     t6 = sub(t5,t4)
     mult(t6, 1/n2)
-
     return norm_v(t6)
 
 def plane():
-    # print("Enter r0:")
-    # r0 = get_v()
-    # print("Enter e:")
-    # e = norm_v(get_v())
-    # print("Enter rp0:")
-    # rp0 = get_v()
-    # print("Enter n:")
-    # n = norm_v(get_v())
 
     r0,e,rp0,n = test()
 
-    t = (scal_mult(n,sub(r0,rp0)))/(scal_mult(n,e))
+    t = (dot(n,sub(r0,rp0)))/(dot(n,e))
     print("Длина луча ", t)
 
     cross_point = sum(rp0, (mult(e,t)))
