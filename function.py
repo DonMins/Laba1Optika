@@ -39,3 +39,11 @@ def mult(v, k):
     for i in range(len(v)):
         res.append(v[i] * k)
     return res
+
+def sign(a):
+    if a < 0:
+        return -1
+    elif a == 0:
+        return 0
+    else:
+        return 1

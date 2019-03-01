@@ -1,47 +1,7 @@
 import numpy as np
 from numpy import dot # cкалярное произведение
+from function import *
 import matplotlib.pyplot as plt
-
-
-def get_len(v):
-    result = 0
-    for i in range(len(v)):
-        result += v[i] ** 2
-    return np.sqrt(result)
-
-
-# нормировка
-def norm_v(v):
-    l = get_len(v)
-    for i in range(len(v)):
-        v[i] = v[i] / l
-    return v
-
-# ввод значений
-def get_v():
-    v = str(input()).split(' ')
-    result = []
-    for e in v:
-        result.append(float(e))
-    return result
-
-def sub(a, b):
-    res = []
-    for i in range(len(a)):
-        res.append(a[i] - b[i])
-    return res
-
-def sum(a, b):
-    res = []
-    for i in range(len(a)):
-        res.append(a[i] + b[i])
-    return res
-
-def mult(v, k):
-    res = []
-    for i in range(len(v)):
-        res.append(v[i] * k)
-    return res
 
 
 def intersection_with_sphere(r0, R, p0, e):
@@ -51,21 +11,18 @@ def intersection_with_sphere(r0, R, p0, e):
     else:
         t1 = abs((dot(sub(r0, p0), e)) - np.sqrt(temp))
         t2 = abs((dot(sub(r0, p0), e)) + np.sqrt(temp))
-        if t1 < 0:
-            if t2 < 0:
-                print('Луч не пересекает сферу')
-            else:
-                return t2
-        elif t2 < 0:
-            return t1
+        if p0[0]-R/2<r0[0]<p0[0]+R/2:
+            return max(t1,t2)
         else:
-            return min(t1, t2)
+            return min(t1,t2)
 
 
 def normal(r0, e, p0, t):
     temp = sub(sum(r0, mult(e, t)), p0)
-    n = mult(temp, 1 / np.sqrt(dot(temp, temp)))
+    n = mult(temp, 1 / np
+             .sqrt(dot(temp, temp)))
     n = norm_v(n)
+
     return n
 
 
@@ -74,13 +31,7 @@ def plot_sphere(p0, R):
     plt.plot(R * np.cos(i) + p0[0], R * np.sin(i) + p0[1])
 
 
-def sign(a):
-    if a < 0:
-        return -1
-    elif a == 0:
-        return 0
-    else:
-        return 1
+
 
 def reflection_from_sphere(e, n):
     e_refl = sub(e, mult(n, 2 * dot(e, n)))
