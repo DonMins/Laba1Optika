@@ -4,11 +4,24 @@ from function import *
 import matplotlib.pyplot as plt
 import  numpy as np
 
-def normal(r0, e, p0, t):
-    temp = sub(sum(r0, mult(e,t)), p0)
-    n = mult(temp,1 / np.sqrt(dot(temp, temp)))
-    n = norm_v(n)
-    return n
+# def normal(r0, e, p0, t):
+#     temp = sub(sum(r0, mult(e,t)), p0)
+#     n = mult(temp,1 / np.sqrt(dot(temp, temp)))
+#     n = norm_v(n)
+#     return n
+
+def derivative(point,a,b,el):
+
+    return (-1)*(point[1]-el[1])/(point[0]-el[0])
+
+def normal(a,b,el,point):
+    a =derivative(point,a,b,el)
+    v = np.arctan(a)
+    return [np.sin(v),np.cos(v)]
+
+
+
+
 
 
 def refraction_after_ellipsoid(n_refr, e, n):

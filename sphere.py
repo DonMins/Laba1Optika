@@ -19,8 +19,7 @@ def intersection_with_sphere(r0, R, p0, e):
 
 def normal(r0, e, p0, t):
     temp = sub(sum(r0, mult(e, t)), p0)
-    n = mult(temp, 1 / np
-             .sqrt(dot(temp, temp)))
+    n = mult(temp, 1 / np.sqrt(dot(temp, temp)))
     n = norm_v(n)
 
     return n
