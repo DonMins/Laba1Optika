@@ -10,17 +10,13 @@ import  numpy as np
 #     n = norm_v(n)
 #     return n
 
-def derivative(point,a,b,el):
+def derivative(x0,y0,a,b):
+    return -(x0 * (b ** 2)) / (y0 * (a ** 2))
 
-    return (-1)*(point[1]-el[1])/(point[0]-el[0])
-
-def normal(a,b,el,point):
-    a =derivative(point,a,b,el)
-    v = np.arctan(a)
-    return [np.sin(v),np.cos(v)]
-
-
-
+def normal(x0,y0,a,b):
+    a =derivative(x0,y0,a,b)
+    a = np.arctan(a)
+    return np.array([np.cos(a), np.sin(a)])
 
 
 

@@ -23,10 +23,10 @@ def testElips():
 
     r0 = [1,1]  # Введите радиус-вектор начала луча
     e = norm_v([1, -1])  # вектор направления луча
-    n_r = [1, 2]  # кф преломления
+    n_r = [1, 0.8]  # кф преломления
     a = 3
     b = 2
-    el = [1, 1]
+    el = [1, 2]
     return r0, e, el, a, b, n_r
 
 def check_ellipsoid():
@@ -41,11 +41,9 @@ def check_ellipsoid():
         print("Точка пересечения ", cross_point)
 
         p0_refl_e = sum(r0, mult(e,t_e))
-        n = normal(a,b, el, cross_point)
+        n = normal(cross_point[0],cross_point[1],a,b)
         print('normal ', n)
-        a1 = (cross_point[0] - n[1], cross_point[1] + n[0])
-        b1 = (cross_point[0] + n[1], cross_point[1] - n[0])
-        plt.plot(a1,b1)
+
         e_refl_e = reflection_from_ellipsoid(e, n)
         print('e_refl_e', e_refl_e)
         p0_refr_e = p0_refl_e
@@ -56,6 +54,7 @@ def check_ellipsoid():
         plot_ray(r0, e, t_e, 'Исходный луч')
         plot_ray(p0_refl_e, e_refl_e, t_e, 'Отражённый луч')
         plot_ray(p0_refr_e, e_refr_e, t_e, 'Преломлённый луч')
+
         plt.legend(loc=1)
         plt.grid()
         plt.show()
